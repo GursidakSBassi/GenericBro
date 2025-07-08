@@ -19,7 +19,6 @@ html, body, [class*="css"] {{
     background-color: #f9fafa;
 }}
 
-/* Moving text banner */
 .moving-text-container {{
     overflow: hidden;
     white-space: nowrap;
@@ -39,12 +38,8 @@ html, body, [class*="css"] {{
 }}
 
 @keyframes scroll-left {{
-    0% {{
-        transform: translateX(0);
-    }}
-    100% {{
-        transform: translateX(-100%);
-    }}
+    0% {{ transform: translateX(0); }}
+    100% {{ transform: translateX(-100%); }}
 }}
 
 .container {{
@@ -82,19 +77,20 @@ html, body, [class*="css"] {{
     color: #222;
 }}
 
-.feature-button {{
+.feature-card {{
     background-color: #ffffff;
     border: 2px solid #02899d;
     color: #02899d;
-    padding: 1rem 2rem;
+    padding: 1.2rem 1rem;
     font-size: 1rem;
+    font-weight: 600;
     border-radius: 12px;
-    cursor: pointer;
     transition: all 0.3s ease;
-    width: 230px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }}
 
-.feature-button:hover {{
+.feature-card:hover {{
     background-color: #02899d;
     color: white;
     transform: scale(1.03);
@@ -143,22 +139,19 @@ html, body, [class*="css"] {{
 </div>
 """, unsafe_allow_html=True)
 
-# === FEATURE BUTTONS ===
+# === FEATURE CARDS (non-clickable) ===
 st.markdown('<div class="features-title">🔍 What can you do with GenericBro?</div>', unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    if st.button("💊 Generic Medicine Finder"):
-        st.switch_page("generic_medicine.py")
+    st.markdown('<div class="feature-card">💊 Generic Medicine Finder</div>', unsafe_allow_html=True)
 
 with col2:
-    if st.button("📍 Pharmacy Locator"):
-        st.switch_page("pharmacy_locator.py")
+    st.markdown('<div class="feature-card">📍 Pharmacy Locator</div>', unsafe_allow_html=True)
 
 with col3:
-    if st.button("📝 Prescription Reader"):
-        st.switch_page("prescription_reader.py")
+    st.markdown('<div class="feature-card">📝 Prescription Reader</div>', unsafe_allow_html=True)
 
 # === GET STARTED ===
 st.markdown("""
@@ -187,5 +180,5 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# === Close container ===
+# Close container div
 st.markdown('</div>', unsafe_allow_html=True)
