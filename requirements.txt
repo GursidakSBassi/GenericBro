@@ -8,3 +8,5 @@ folium
 streamlit-folium
 streamlit-geolocation
 reportlab
+matplotlib
+
