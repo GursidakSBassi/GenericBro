@@ -1,0 +1,10 @@
+streamlit
+pandas
+numpy
+pytesseract
+Pillow
+pdf2image
+folium
+streamlit-folium
+streamlit-geolocation
+reportlab
