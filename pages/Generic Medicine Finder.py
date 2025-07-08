@@ -246,4 +246,47 @@ if det:
         st.markdown("#### Possible Side Effects")
         st.markdown(side)
 
+        # Add at the end of your app after showing uses and side effects
+
+
+    # ────── NEW: MEDICINE-SPECIFIC INFOGRAPHIC ──────
+    st.markdown("#### 📈 Medicine Infographic")
+
+    # Bar chart – Branded vs Generic
+    fig1, ax1 = plt.subplots(figsize=(3.5, 2.5))
+    ax1.bar(["Branded", "Generic"],
+            [det.get(COL_PRICE_BRAND, 0), det.get(COL_PRICE_GENERIC, 0)],
+            color=["#ff6f61", "#66bb6a"])
+    ax1.set_title("Price Comparison", fontsize=10)
+    ax1.set_ylabel("₹", fontsize=9)
+    ax1.tick_params(labelsize=8)
+    st.pyplot(fig1)
+
+    # Pie chart – Savings %
+    if pd.notna(det.get(COL_SAVE_PCT)):
+        savings = det[COL_SAVE_PCT]
+        fig2, ax2 = plt.subplots(figsize=(3, 2.5))
+        ax2.pie([savings, 100 - savings],
+                labels=["Saved", "Paid"],
+                colors=["#4db6ac", "#ddd"],
+                autopct="%.1f%%",
+                startangle=90)
+        ax2.set_title("Savings Share", fontsize=10)
+        st.pyplot(fig2)
+
+    # Top formulations bar – Same therapeutic type
+    if COL_FORMULATION in det and COL_TYPE in det:
+        form_name = det[COL_FORMULATION]
+        type_clean = det[COL_TYPE].strip().lower()
+        form_count_df = df[df[COL_TYPE].str.strip().str.lower() == type_clean]
+        top_forms = form_count_df[COL_FORMULATION].value_counts().nlargest(5)
+
+        fig3, ax3 = plt.subplots(figsize=(3.5, 2.5))
+        top_forms.plot(kind="bar", ax=ax3, color="#02899d")
+        ax3.set_title("Top Formulations in Category", fontsize=10)
+        ax3.set_ylabel("No. of Medicines", fontsize=9)
+        ax3.tick_params(labelsize=8)
+        st.pyplot(fig3)
+
 st.caption("Click a medicine name to view its details. Adjust filters and hit Search.")
+
