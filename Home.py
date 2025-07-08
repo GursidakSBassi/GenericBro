@@ -39,12 +39,8 @@ html, body, [class*="css"] {{
 }}
 
 @keyframes scroll-left {{
-    0% {{
-        transform: translateX(0);
-    }}
-    100% {{
-        transform: translateX(-100%);
-    }}
+    0% {{ transform: translateX(0); }}
+    100% {{ transform: translateX(-100%); }}
 }}
 
 .container {{
@@ -150,15 +146,15 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     if st.button("💊 Generic Medicine Finder"):
-        st.switch_page("generic_medicine.py")
+        st.switch_page("Generic Medicine Finder")
 
 with col2:
     if st.button("📍 Pharmacy Locator"):
-        st.switch_page("pharmacy_locator.py")
+        st.switch_page("Pharmacy Locator")
 
 with col3:
     if st.button("📝 Prescription Reader"):
-        st.switch_page("prescription_reader.py")
+        st.switch_page("Prescription Reader")
 
 # === GET STARTED ===
 st.markdown("""
