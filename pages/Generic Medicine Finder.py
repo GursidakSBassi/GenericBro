@@ -90,7 +90,7 @@ def show_clickable_table(df_: pd.DataFrame, header=None, key_prefix="tbl"):
 
     hdr = st.columns([2.5, 2, 2, 2, 2, 2])
     for col, text in zip(hdr, ["Name", "Formulation", "Dosage", "Generic ₹", "Branded ₹", "Savings %"]):
-        col.markdown(f"*{text}*")
+        col.markdown(f"{text}")
 
     for i, row in df_page.iterrows():
         c = st.columns([2.5, 2, 2, 2, 2, 2])
@@ -195,7 +195,7 @@ if r2[2].button("Search", key="search_btn"):
 
 # ──────────── 6. FILTER + DISPLAY ────────────
 if not st.session_state.run_search:
-    st.info("Adjust filters, then click *Search* to view results.")
+    st.info("Adjust filters, then click Search to view results.")
     st.stop()
 
 if mode == "Medicine name":
@@ -227,7 +227,7 @@ if mode == "Medicine name":
         show_clickable_table(hits_sorted, "Medicines", "generic")
     else:
         st.subheader("Exact Match")
-        st.markdown(f"*Formulation – {hits_sorted.at[0, COL_FORMULATION]}*")
+        st.markdown(f"Formulation – {hits_sorted.at[0, COL_FORMULATION]}")
         show_clickable_table(hits_sorted, key_prefix="exact")
         st.subheader("All Medicines with the Same Formulation")
         show_clickable_table(same_sorted, key_prefix="same")
@@ -238,7 +238,8 @@ det = st.session_state.detail_row
 if det:
     uses = bulletify(det.get(COL_USES, ""))
     side = bulletify(det.get(COL_SIDE_EFF, ""))
-    if uses or side: st.markdown("---")
+    if uses or side:
+        st.markdown("---")
     if uses:
         st.markdown(f"#### Uses of {det[COL_NAME]}")
         st.markdown(uses)
@@ -246,33 +247,32 @@ if det:
         st.markdown("#### Possible Side Effects")
         st.markdown(side)
 
-        # Add at the end of your app after showing uses and side effects
-
-
     # ────── NEW: MEDICINE-SPECIFIC INFOGRAPHIC ──────
     st.markdown("#### 📈 Medicine Infographic")
 
-    # Bar chart – Branded vs Generic
-    fig1, ax1 = plt.subplots(figsize=(3.5, 2.5))
+    # Bar chart – Branded vs Generic (smaller)
+    fig1, ax1 = plt.subplots(figsize=(2.5, 2))  # smaller figure
     ax1.bar(["Branded", "Generic"],
             [det.get(COL_PRICE_BRAND, 0), det.get(COL_PRICE_GENERIC, 0)],
             color=["#ff6f61", "#66bb6a"])
     ax1.set_title("Price Comparison", fontsize=10)
     ax1.set_ylabel("₹", fontsize=9)
     ax1.tick_params(labelsize=8)
-    st.pyplot(fig1)
+    fig1.tight_layout()
+    st.pyplot(fig1, use_container_width=False)
 
     # Pie chart – Savings %
     if pd.notna(det.get(COL_SAVE_PCT)):
         savings = det[COL_SAVE_PCT]
-        fig2, ax2 = plt.subplots(figsize=(3, 2.5))
+        fig2, ax2 = plt.subplots(figsize=(2.3, 2.3))  # smaller figure
         ax2.pie([savings, 100 - savings],
                 labels=["Saved", "Paid"],
                 colors=["#4db6ac", "#ddd"],
                 autopct="%.1f%%",
                 startangle=90)
         ax2.set_title("Savings Share", fontsize=10)
-        st.pyplot(fig2)
+        fig2.tight_layout()
+        st.pyplot(fig2, use_container_width=False)
 
     # Top formulations bar – Same therapeutic type
     if COL_FORMULATION in det and COL_TYPE in det:
@@ -281,12 +281,10 @@ if det:
         form_count_df = df[df[COL_TYPE].str.strip().str.lower() == type_clean]
         top_forms = form_count_df[COL_FORMULATION].value_counts().nlargest(5)
 
-        fig3, ax3 = plt.subplots(figsize=(3.5, 2.5))
+        fig3, ax3 = plt.subplots(figsize=(2.5, 2))  # smaller figure
         top_forms.plot(kind="bar", ax=ax3, color="#02899d")
         ax3.set_title("Top Formulations in Category", fontsize=10)
         ax3.set_ylabel("No. of Medicines", fontsize=9)
         ax3.tick_params(labelsize=8)
-        st.pyplot(fig3)
-
-st.caption("Click a medicine name to view its details. Adjust filters and hit Search.")
-
+        fig3.tight_layout()
+        st.pyplot(fig3, use_container_width=False)
