@@ -71,28 +71,35 @@ html, body, [class*="css"] {{
 
 .features-title {{
     font-size: 1.4rem;
-    color: #02899d;
-    margin-top: 3rem;
-    margin-bottom: 1rem;
     font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    color: #222;
+}}
+
+.feature-card {{
+    background-color: #ffffff;
+    border: 2px solid #02899d;
+    color: #02899d;
+    padding: 1.2rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}}
+
+.feature-card:hover {{
+    background-color: #02899d;
+    color: white;
+    transform: scale(1.03);
 }}
 </style>
 """, unsafe_allow_html=True)
 
-# === Top Section ===
-st.markdown(f"""
-<div class="container">
-    <img src="data:image/jpeg;base64,{logo_base64}" class="logo" />
-    <h1 class="main-title">GenericBro</h1>
-    <p class="subtitle">💊 Compare medicines, find pharmacies & digitize prescriptions.</p>
-</div>
-<div class="moving-text-container">
-    <div class="moving-text">Welcome to GenericBro - Empowering Affordable Healthcare with AI ⚕️</div>
-</div>
-""", unsafe_allow_html=True)
-
-# === Navigation Section (New) ===
-st.markdown('<h3 class="features-title">🛠️ Explore Our Tools</h3>', unsafe_allow_html=True)
+# === Redirect Buttons ===
+st.markdown("## 🔗 Jump to Tools")
 
 col1, col2, col3 = st.columns(3)
 
@@ -104,7 +111,3 @@ with col2:
 
 with col3:
     st.page_link("pages/Prescription Reader.py", label="📄 Prescription Reader")
-
-# === Keep your future contents here ===
-st.markdown("---")
-st.markdown("✅ More features and insights coming soon. Stay tuned!")
