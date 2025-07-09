@@ -88,26 +88,191 @@ html, body, [class*="css"] {{
     transition: all 0.3s ease;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
 }}
 
 .feature-card:hover {{
     background-color: #02899d;
     color: white;
     transform: scale(1.03);
+    text-decoration: none;
+}}
+
+.feature-card:active {{
+    transform: scale(0.98);
+}}
+
+.get-started {{
+    text-align: left;
+    margin-top: 2.5rem;
+}}
+
+.get-started h3 {{
+    font-size: 1.3rem;
+    color: #02899d;
+}}
+
+.get-started ul {{
+    font-size: 1rem;
+    color: #444;
+    margin-top: 0.5rem;
+}}
+
+.footer {{
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: #999;
+    text-align: center;
+}}
+
+.navigation-buttons {{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}}
+
+.nav-button {{
+    background: linear-gradient(135deg, #02899d, #4db6ac);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 180px;
+    box-shadow: 0 4px 15px rgba(2, 137, 157, 0.3);
+}}
+
+.nav-button:hover {{
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(2, 137, 157, 0.4);
+    text-decoration: none;
+    color: white;
+}}
+
+.nav-button:active {{
+    transform: translateY(0);
+}}
+
+@media (max-width: 768px) {{
+    .navigation-buttons {{
+        flex-direction: column;
+        align-items: center;
+    }}
+    
+    .nav-button {{
+        width: 100%;
+        max-width: 300px;
+    }}
 }}
 </style>
+
+<!-- Moving text banner -->
+<div class="moving-text-container">
+    <div class="moving-text">
+        💊 Find Generic Medicines at Affordable Prices | 📍 Locate Nearby Pharmacies | 📝 Upload Prescriptions for Easy Medicine Extraction | 🏥 Your Health, Our Priority | 💰 Save Money on Healthcare | 🌟 Trusted by Thousands
+    </div>
+</div>
+
+<div class="container">
+    <div style="text-align: center;">
+        <img src="data:image/jpeg;base64,{logo_base64}" class="logo" />
+        <div class="main-title">GenericBro</div>
+        <div class="subtitle">
+            Affordable Healthcare at Your Fingertips.<br>
+            Find <b>generic alternatives</b> and <b>locate pharmacies</b> instantly.
+        </div>
+    </div>
+</div>
 """, unsafe_allow_html=True)
 
-# === Redirect Buttons ===
-st.markdown("## 🔗 Jump to Tools")
+# === NAVIGATION BUTTONS ===
+st.markdown("""
+<div class="navigation-buttons">
+    <a href="/Generic_Medicine_Finder" target="_self" class="nav-button">
+        💊 Generic Medicine Finder
+    </a>
+    <a href="/Pharmacy_Locator" target="_self" class="nav-button">
+        📍 Pharmacy Locator
+    </a>
+    <a href="/Prescription_Reader" target="_self" class="nav-button">
+        📝 Prescription Reader
+    </a>
+</div>
+""", unsafe_allow_html=True)
+
+# === FEATURE CARDS (Interactive) ===
+st.markdown('<div class="features-title">🔍 What can you do with GenericBro?</div>', unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.page_link("pages/Generic Medicine Finder.py", label="🔍 Generic Medicine Finder")
+    if st.button("💊 Generic Medicine Finder", key="med_finder", help="Find affordable generic alternatives"):
+        st.switch_page("pages/Generic Medicine Finder.py")
 
 with col2:
-    st.page_link("pages/Pharmacy Locator.py", label="📍 Pharmacy Locator")
+    if st.button("📍 Pharmacy Locator", key="pharm_locator", help="Locate nearby pharmacies"):
+        st.switch_page("pages/Pharmacy Locator.py")
 
 with col3:
-    st.page_link("pages/Prescription Reader.py", label="📄 Prescription Reader")
+    if st.button("📝 Prescription Reader", key="pres_reader", help="Upload and read prescriptions"):
+        st.switch_page("pages/Prescription Reader.py")
+
+# === GET STARTED ===
+st.markdown("""
+<div class="get-started">
+    <h3>🚀 Get Started</h3>
+    <ul>
+        <li><b>Generic Medicine Finder</b>: Discover affordable alternatives to branded medicines with detailed price comparisons and savings information.</li>
+        <li><b>Pharmacy Locator</b>: Find nearby pharmacies using GPS location, PIN code, or city search with interactive maps and navigation.</li>
+        <li><b>Prescription Reader</b>: Upload prescription images or PDFs to automatically extract medicine names and find generic alternatives.</li>
+    </ul>
+</div>
+""", unsafe_allow_html=True)
+
+# === QUICK STATS ===
+st.markdown("""
+<div style="background: linear-gradient(135deg, #02899d, #4db6ac); color: white; padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
+    <h3 style="color: white; margin-bottom: 1rem;">📊 Platform Statistics</h3>
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem;">
+        <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700;">1000+</div>
+            <div style="font-size: 0.9rem; opacity: 0.9;">Generic Medicines</div>
+        </div>
+        <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700;">500+</div>
+            <div style="font-size: 0.9rem; opacity: 0.9;">Pharmacies Listed</div>
+        </div>
+        <div style="text-align: center;">
+            <div style="font-size: 2rem; font-weight: 700;">60%</div>
+            <div style="font-size: 0.9rem; opacity: 0.9;">Average Savings</div>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# === FOOTER ===
+st.markdown("""
+<div class="footer">
+    Built with ❤️ by Team GenericBro. <br>
+    <div style="margin-top: 1rem; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px;">
+        <span style="background: linear-gradient(135deg, #02899d, #4db6ac); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">👨‍💻 Nidhish</span>
+        <span style="background: linear-gradient(135deg, #ff6b6b, #ff8e8e); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">💻 Gursidak</span>
+        <span style="background: linear-gradient(135deg, #a8e6cf, #7fcdcd); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">👩‍💻 Varshini</span>
+        <span style="background: linear-gradient(135deg, #ffd93d, #ffb347); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">🧑‍💻 Oindrila</span>
+        <span style="background: linear-gradient(135deg, #c7a8ff, #b18cff); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">💻 Atharva</span>
+        <span style="background: linear-gradient(135deg, #ff9a9e, #fecfef); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">👩‍💻 Poorvi</span>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# Close container div
+st.markdown('</div>', unsafe_allow_html=True)
