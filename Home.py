@@ -135,7 +135,7 @@ html, body, [class*="css"] {{
     flex-wrap: wrap;
 }}
 
-.nav-button, .nav-button:visited, .nav-button:link {
+.nav-button, .nav-button:visited, .nav-button:link {{
     background: linear-gradient(135deg, #02899d, #4db6ac);
     color: white !important;
     padding: 12px 24px;
@@ -209,7 +209,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-
 # === GET STARTED ===
 st.markdown("""
 <div class="get-started">
@@ -258,5 +257,5 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Close container div
-st.markdown('</div>', unsafe_allow_html=True)
+# Close container div (in case any outer <div> was opened)
+st.markdown("</div>", unsafe_allow_html=True)
