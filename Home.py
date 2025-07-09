@@ -135,9 +135,9 @@ html, body, [class*="css"] {{
     flex-wrap: wrap;
 }}
 
-.nav-button {{
+.nav-button, .nav-button:visited, .nav-button:link {
     background: linear-gradient(135deg, #02899d, #4db6ac);
-    color: white;
+    color: white !important;
     padding: 12px 24px;
     border: none;
     border-radius: 25px;
@@ -145,11 +145,12 @@ html, body, [class*="css"] {{
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    text-decoration: none;
+    text-decoration: none !important;
     display: inline-block;
     min-width: 180px;
     box-shadow: 0 4px 15px rgba(2, 137, 157, 0.3);
-}}
+}
+}
 
 .nav-button:hover {{
     transform: translateY(-2px);
