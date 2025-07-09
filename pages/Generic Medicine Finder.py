@@ -43,30 +43,40 @@ th,td{padding:6px 4px;font-size:.9rem;}
 """, unsafe_allow_html=True)
 
 # ──────────── 3. LOAD DATA ────────────
-@st.cache_data
-def load_data(path="Final.csv"):
-    df = pd.read_csv(path)
-    df.columns = df.columns.str.strip()
-    rename = {"uses": "Uses", "indications": "Uses", "side effects": "Side effects", "adverse effects": "Side effects"}
-    df.rename(columns={c: rename[c.lower()] for c in df if c.lower() in rename}, inplace=True)
-    df["_form_clean"]   = df[COL_FORMULATION].str.strip().str.lower()
-    # Add formulation type classification
 def is_mixed(formulation):
     if pd.isna(formulation): return "Pure"
     return "Mixed" if re.search(r"\+|/|,|&", formulation) else "Pure"
 
-df["Formulation Type"] = df[COL_FORMULATION].apply(is_mixed)
+@st.cache_data
+def load_data(path="Final.csv"):
+    df = pd.read_csv(path)
+    df.columns = df.columns.str.strip()
 
-df["_dosage_clean"] = df[COL_DOSAGE].astype(str).str.strip().str.lower()
-df["_type_clean"]   = df[COL_TYPE].str.strip().str.lower()
-for col in (COL_PRICE_GENERIC, COL_PRICE_BRAND, COL_SAVE_PCT):
+    rename = {
+        "uses": "Uses",
+        "indications": "Uses",
+        "side effects": "Side effects",
+        "adverse effects": "Side effects"
+    }
+    df.rename(columns={c: rename[c.lower()] for c in df if c.lower() in rename}, inplace=True)
+
+    df["_form_clean"] = df[COL_FORMULATION].str.strip().str.lower()
+    df["Formulation Type"] = df[COL_FORMULATION].apply(is_mixed)
+    df["_dosage_clean"] = df[COL_DOSAGE].astype(str).str.strip().str.lower()
+    df["_type_clean"] = df[COL_TYPE].str.strip().str.lower()
+
+    for col in (COL_PRICE_GENERIC, COL_PRICE_BRAND, COL_SAVE_PCT):
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
-if COL_SAVE_PCT not in df.columns and {COL_PRICE_GENERIC, COL_PRICE_BRAND}.issubset(df.columns):
-        df[COL_SAVE_PCT] = 100 * (df[COL_PRICE_BRAND] - df[COL_PRICE_GENERIC]) / df[COL_PRICE_BRAND]
-return df
 
+    if COL_SAVE_PCT not in df.columns and {COL_PRICE_GENERIC, COL_PRICE_BRAND}.issubset(df.columns):
+        df[COL_SAVE_PCT] = 100 * (df[COL_PRICE_BRAND] - df[COL_PRICE_GENERIC]) / df[COL_PRICE_BRAND]
+
+    return df
+
+# Call the function after definition
 df = load_data()
+
 
 # ──────────── 4. HELPERS ────────────
 def bulletify(txt):
