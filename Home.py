@@ -209,22 +209,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# === FEATURE CARDS (Interactive) ===
-st.markdown('<div class="features-title">🔍 What can you do with GenericBro?</div>', unsafe_allow_html=True)
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    if st.button("💊 Generic Medicine Finder", key="med_finder", help="Find affordable generic alternatives"):
-        st.switch_page("pages/Generic Medicine Finder.py")
-
-with col2:
-    if st.button("📍 Pharmacy Locator", key="pharm_locator", help="Locate nearby pharmacies"):
-        st.switch_page("pages/Pharmacy Locator.py")
-
-with col3:
-    if st.button("📝 Prescription Reader", key="pres_reader", help="Upload and read prescriptions"):
-        st.switch_page("pages/Prescription Reader.py")
 
 # === GET STARTED ===
 st.markdown("""
