@@ -160,13 +160,21 @@ if st.session_state.show_insights:
     plot_infographics(df)
     st.stop()
 
-mode_cols = st.columns([0.4, 0.3, 0.3])
-with mode_cols[1]:
+mode_cols = st.columns([0.3, 0.3, 0.4])
+with mode_cols[0]:
     if st.button("Name", key="mode_name"):
         st.session_state.search_mode = "Medicine name"
-with mode_cols[2]:
+with mode_cols[1]:
     if st.button("Formulation", key="mode_form"):
         st.session_state.search_mode = "Formulation"
+with mode_cols[2]:
+    if st.button("Ailment", key="mode_ailment"):
+        st.session_state.search_mode = "Ailment"
+
+mode = st.session_state.search_mode
+if mode == "Ailment":
+    ailment_input = st.text_input("Enter ailment name (e.g., pain, fever, diabetes)")
+
 
 r1 = st.columns([1.2, 1, 1])
 types = sorted(df[COL_TYPE].dropna().unique())
@@ -200,11 +208,20 @@ if not st.session_state.run_search:
 
 if mode == "Medicine name":
     hits = base_df if not name_sel else base_df[base_df[COL_NAME] == picked]
-else:
+elif mode == "Formulation":
     if picked == "— select —":
         st.warning("Please select a formulation.")
         st.stop()
     hits = base_df[base_df[COL_FORMULATION].str.lower().str.strip() == picked.strip().lower()]
+elif mode == "Ailment":
+    if not ailment_input.strip():
+        st.warning("Please enter an ailment name.")
+        st.stop()
+    hits = base_df[base_df[COL_USES].str.contains(ailment_input.strip(), case=False, na=False)]
+else:
+    st.warning("Invalid mode.")
+    st.stop()
+
 
 if dose != "All":
     hits = hits[hits["_dosage_clean"] == dose]
