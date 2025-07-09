@@ -149,8 +149,7 @@ html, body, [class*="css"] {{
     display: inline-block;
     min-width: 180px;
     box-shadow: 0 4px 15px rgba(2, 137, 157, 0.3);
-}
-}
+}}
 
 .nav-button:hover {{
     transform: translateY(-2px);
