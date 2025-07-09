@@ -178,7 +178,7 @@ html, body, [class*="css"] {{
 <!-- Moving text banner -->
 <div class="moving-text-container">
     <div class="moving-text">
-        💊 Find Generic Medicines at Affordable Prices | 📍 Locate Nearby Pharmacies | 📝 Upload Prescriptions for Easy Medicine Extraction | 🏥 Your Health, Our Priority | 💰 Save Money on Healthcare | 🌟 Trusted by Thousands
+        💊 Find Generic Medicines at Affordable Prices | 📍 Locate Nearby Pharmacies | 📝 Upload Prescriptions for Easy Medicine Extraction | 🏥 Your Health, Our Priority | 💰 Save Money on Healthcare
     </div>
 </div>
 
