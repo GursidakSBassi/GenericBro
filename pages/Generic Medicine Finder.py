@@ -303,7 +303,7 @@ if mode == "Medicine name" and "name_sel" in locals() and name_sel:
         same = same[same["_dosage_clean"] == dose]
     if form_type == "Pure Formulation":
        same = same[same["Formulation Type"] == "Pure"]
-elif form_type == "Mixed Formulation":
+    elif form_type == "Mixed Formulation":
        same = same[same["Formulation Type"] == "Mixed"]
 
 
