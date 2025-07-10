@@ -3,24 +3,42 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import re
 
-# === APPLY THEME FROM SESSION ===
+# Read the theme from session
 theme = st.session_state.get("theme", "Light Mode")
 
+# Inject additional dark theme styling for widgets
 if theme == "Dark Mode":
     st.markdown("""
         <style>
-        html, body, [class*="css"] {
-            background-color: #111111 !important;
+        /* Input boxes and text fields */
+        input, textarea, .stTextInput > div > div > input {
+            background-color: #1e1e1e !important;
+            color: #f5f5f5 !important;
+            border: 1px solid #555 !important;
+        }
+
+        /* Dropdowns */
+        .stSelectbox > div > div {
+            background-color: #1e1e1e !important;
+            color: #f5f5f5 !important;
+            border: 1px solid #555 !important;
+        }
+
+        /* Buttons */
+        button[kind="secondary"], .stButton > button {
+            background-color: #333333 !important;
+            color: white !important;
+            border: 1px solid #666666 !important;
+        }
+
+        /* Radio buttons */
+        .stRadio > div {
             color: #f5f5f5 !important;
         }
-        </style>
-    """, unsafe_allow_html=True)
-else:
-    st.markdown("""
-        <style>
-        html, body, [class*="css"] {
-            background-color: #f9fafa !important;
-            color: #000000 !important;
+
+        /* Labels */
+        label, .css-1cpxqw2 {
+            color: #ddd !important;
         }
         </style>
     """, unsafe_allow_html=True)
