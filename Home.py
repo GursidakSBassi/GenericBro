@@ -1,53 +1,43 @@
 import streamlit as st
 import base64
 
-# === DARK/LIGHT MODE TOGGLE ===
+# === THEME TOGGLE ===
 theme = st.sidebar.radio("Choose Theme", ("Light Mode", "Dark Mode"))
 
-# Inject Dynamic Theme CSS
+# === COLOR SETUP BASED ON THEME ===
 if theme == "Dark Mode":
-    st.markdown("""
-        <style>
-        html, body, [class*="css"] {
-            background-color: #111 !important;
-            color: #f5f5f5 !important;
-        }
-        .nav-button, .feature-card {
-            background-color: #222 !important;
-            color: #f5f5f5 !important;
-            border-color: #444 !important;
-        }
-        .feature-card:hover {
-            background-color: #444 !important;
-            color: #fff !important;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+    background = "#111111"
+    text_color = "#f5f5f5"
+    subtitle_color = "#cccccc"
+    card_bg = "#1e1e1e"
+    card_border = "#444444"
+    hover_bg = "#333333"
+    hover_text = "#ffffff"
 else:
-    st.markdown("""
-        <style>
-        html, body, [class*="css"] {
-            background-color: #f9fafa !important;
-            color: #000 !important;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+    background = "#f9fafa"
+    text_color = "#000000"
+    subtitle_color = "#444444"
+    card_bg = "#ffffff"
+    card_border = "#02899d"
+    hover_bg = "#02899d"
+    hover_text = "#ffffff"
 
 # === Load and Encode Logo ===
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
 
-# Load logo as base64
 logo_base64 = get_base64_image("logo.jpeg")
 
-# === STYLING ===
+# === DYNAMIC CSS BASED ON THEME ===
 st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 html, body, [class*="css"] {{
     font-family: 'Inter', sans-serif;
+    background-color: {background};
+    color: {text_color};
 }}
 
 .moving-text-container {{
@@ -96,7 +86,7 @@ html, body, [class*="css"] {{
 
 .subtitle {{
     font-size: 1.1rem;
-    color: #444;
+    color: {subtitle_color};
     margin-bottom: 2.5rem;
 }}
 
@@ -105,13 +95,13 @@ html, body, [class*="css"] {{
     font-weight: 600;
     margin-top: 2rem;
     margin-bottom: 1.5rem;
-    color: #222;
+    color: {text_color};
 }}
 
 .feature-card {{
-    background-color: #ffffff;
-    border: 2px solid #02899d;
-    color: #02899d;
+    background-color: {card_bg};
+    border: 2px solid {card_border};
+    color: {card_border};
     padding: 1.2rem 1rem;
     font-size: 1rem;
     font-weight: 600;
@@ -125,8 +115,8 @@ html, body, [class*="css"] {{
 }}
 
 .feature-card:hover {{
-    background-color: #02899d;
-    color: white;
+    background-color: {hover_bg};
+    color: {hover_text};
     transform: scale(1.03);
     text-decoration: none;
 }}
@@ -147,7 +137,7 @@ html, body, [class*="css"] {{
 
 .get-started ul {{
     font-size: 1rem;
-    color: #444;
+    color: {subtitle_color};
     margin-top: 0.5rem;
 }}
 
@@ -198,7 +188,7 @@ html, body, [class*="css"] {{
         flex-direction: column;
         align-items: center;
     }}
-    
+
     .nav-button {{
         width: 100%;
         max-width: 300px;
@@ -253,7 +243,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # === QUICK STATS ===
-st.markdown("""
+st.markdown(f"""
 <div style="background: linear-gradient(135deg, #02899d, #4db6ac); color: white; padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
     <h3 style="color: white; margin-bottom: 1rem;">📊 Platform Statistics</h3>
     <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem;">
@@ -287,6 +277,3 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
-
-# === Close any open container tag ===
-st.markdown("</div>", unsafe_allow_html=True)
