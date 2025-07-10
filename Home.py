@@ -1,14 +1,16 @@
 import streamlit as st
 import base64
 
-# === THEME TOGGLE ===
-theme = st.sidebar.radio("Choose Theme", ("Light Mode", "Dark Mode"))
-
 # === DARK/LIGHT MODE TOGGLE (stored globally) ===
 if "theme" not in st.session_state:
     st.session_state["theme"] = "Light Mode"
 
-st.session_state["theme"] = st.sidebar.radio("Choose Theme", ("Light Mode", "Dark Mode"), index=0 if st.session_state["theme"] == "Light Mode" else 1)
+st.session_state["theme"] = st.sidebar.radio(
+    "Choose Theme",
+    ("Light Mode", "Dark Mode"),
+    index=0 if st.session_state["theme"] == "Light Mode" else 1,
+    key="theme_radio"
+)
 
 theme = st.session_state["theme"]
 
