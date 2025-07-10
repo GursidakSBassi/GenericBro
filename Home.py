@@ -185,7 +185,7 @@ html, body, [class*="css"] {{
 <div class="container">
     <div style="text-align: center;">
         <img src="data:image/jpeg;base64,{logo_base64}" class="logo" />
-        <div class="main-title">GenericBro</div>
+        <div class="main-title">GenericBuddy</div>
         <div class="subtitle">
             Affordable Healthcare at Your Fingertips.<br>
             Find <b>generic alternatives</b> and <b>locate pharmacies</b> instantly.
