@@ -245,7 +245,7 @@ st.markdown("""
 # === FOOTER ===
 st.markdown("""
 <div class="footer">
-    Built with ❤️ by Team GenericBro. <br>
+    Built with ❤️ by Team GenericBuddy. <br>
     <div style="margin-top: 1rem; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px;">
         <span style="background: linear-gradient(135deg, #02899d, #4db6ac); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">👨‍💻 Nidhish</span>
         <span style="background: linear-gradient(135deg, #ff6b6b, #ff8e8e); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;">💻 Gursidak</span>
