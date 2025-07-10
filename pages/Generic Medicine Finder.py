@@ -241,6 +241,9 @@ dosages = sorted(base_df["_dosage_clean"].dropna().unique())
 dose = r1[1].selectbox("Dosage Filter", ["All"] + dosages)
 sort_map = {"Generic price": COL_PRICE_GENERIC, "Branded price": COL_PRICE_BRAND, "Savings %": COL_SAVE_PCT}
 sort_by = r1[2].selectbox("Sort by", list(sort_map))
+# Add Formulation Type Filter
+form_type = st.selectbox("Formulation Type", ["All", "Pure Formulation", "Mixed Formulation"])
+
 
 r2 = st.columns([1.2, 1, 1])
 mode = st.session_state.search_mode
@@ -282,6 +285,12 @@ else:
 
 if dose != "All":
     hits = hits[hits["_dosage_clean"] == dose]
+# Apply Formulation Type Filter
+if form_type == "Pure Formulation":
+    hits = hits[hits["Formulation Type"] == "Pure"]
+elif form_type == "Mixed Formulation":
+    hits = hits[hits["Formulation Type"] == "Mixed"]
+
 
 if hits.empty:
     st.warning("No entries match your filters.")
@@ -292,6 +301,11 @@ if mode == "Medicine name" and "name_sel" in locals() and name_sel:
     same = base_df[base_df["_form_clean"].isin(hits["_form_clean"].unique())]
     if dose != "All":
         same = same[same["_dosage_clean"] == dose]
+    if form_type == "Pure Formulation":
+       same = same[same["Formulation Type"] == "Pure"]
+elif form_type == "Mixed Formulation":
+       same = same[same["Formulation Type"] == "Mixed"]
+
 
 hits_sorted = tidy(safe_sort(hits, sort_map[sort_by], ascending))
 same_sorted = tidy(safe_sort(same, sort_map[sort_by], ascending))
