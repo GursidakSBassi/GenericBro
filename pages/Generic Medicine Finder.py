@@ -3,6 +3,28 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import re
 
+# === APPLY THEME FROM SESSION ===
+theme = st.session_state.get("theme", "Light Mode")
+
+if theme == "Dark Mode":
+    st.markdown("""
+        <style>
+        html, body, [class*="css"] {
+            background-color: #111111 !important;
+            color: #f5f5f5 !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+else:
+    st.markdown("""
+        <style>
+        html, body, [class*="css"] {
+            background-color: #f9fafa !important;
+            color: #000000 !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
 # ──────────── 1. CONSTANTS ────────────
 COL_NAME, COL_FORMULATION, COL_DOSAGE = "Name", "Formulation", "Dosage"
 COL_TYPE, COL_PRICE_GENERIC = "Type", "Cost of generic"
