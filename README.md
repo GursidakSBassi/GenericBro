@@ -40,9 +40,7 @@ Access to affordable medication is a critical issue globally. Here's why generic
 ## 📝 Features (Planned)
 
 - Medicine search & branded-vs-generic comparison  
-- Nearby pharmacy locator  
 - Price insights & savings display  
-- (Future expansion ideas: user analytics, prescription OCR, etc.)
 
 ---
 
